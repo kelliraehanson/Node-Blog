@@ -4,6 +4,13 @@ const Users = require('./userDb.js');
 
 const router = express.Router();
 
+function upperCaser(req, res, next) {
+    req.body.name = req.body.name.toUpperCase();
+    next();
+
+}
+
+
 // GET all posts
 
 router.get('/', (req, res) => {
@@ -37,7 +44,7 @@ router.get('/:id', (req, res) => {
 
 // POST 
 
-router.post('/', (req, res) => {
+router.post('/', upperCaser, (req, res) => {
     const newUser = req.body;
     if (!newUser.name) {
     res.status(400).json({ message: "Please provide title and contents for the post." });
@@ -80,7 +87,7 @@ router.delete('/:id', (req, res) => {
 
 // PUT
 
-router.put("/:id", (req, res) => {
+router.put("/:id", upperCaser, (req, res) => {
     const id = req.params.id;
     const updatedUser = req.body;
 
@@ -124,6 +131,8 @@ router.get('/:id/posts', (req, res) => {
         res.status(500).json({ error: "Error getting posts for the specific user " })
     })
 })
+
+
 
 
 
