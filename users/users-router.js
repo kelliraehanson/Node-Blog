@@ -35,6 +35,8 @@ router.get('/:id', (req, res) => {
 
 })
 
+// POST 
+
 router.post('/', (req, res) => {
     const newUser = req.body;
     if (!newUser.name) {
@@ -43,7 +45,7 @@ router.post('/', (req, res) => {
 
     Users.insert(newUser)
     .then(user => {
-        User.getById(user.id)
+        Users.getById(user.id)
         .then(user => {
             res.status(201).json({ user })
         })
@@ -54,6 +56,29 @@ router.post('/', (req, res) => {
 }
 
 });
+
+// DELETE
+
+router.delete('/:id', (req, res) => {
+    const id = req.params.id;
+    Users.getById(id)
+    .then(user => {
+        if (!user) {
+            res.status(404).json({ message: "The hub could not be found" });
+        } else {
+            Users.remove(id)
+            .then(user => {
+                res.status(204).end();
+            })
+
+        }
+    })
+    .catch(err => {
+        res.status(500).json({ error: "This user could not be removed"})
+    })
+})
+
+
 
 
 module.exports = router;
