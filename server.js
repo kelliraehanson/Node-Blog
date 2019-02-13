@@ -12,6 +12,14 @@ server.use(express.json());
 server.use(helmet());
 server.use(morgan('dev'));
 
-server.use('/api/users', usersRouter);
+server.use('/api/users', upperCaser, usersRouter);
+
+function upperCaser(req, res, next) {
+    req.body.name = req.body.name.toUpperCase();
+    next();
+
+}
+
+
 
 module.exports = server;

@@ -117,11 +117,11 @@ router.get('/:id/posts', (req, res) => {
         if (posts.length > 0) {
         res.status(200).json({posts})
         } else {
-            res.status(404).json({ error: "Could not find any posts for the  "})
+            res.status(404).json({ error: "Could not find any posts for the user" })
         }
     })
     .catch(err => {
-        res.status(500).json({ error: "Error getting posts for the specific "})
+        res.status(500).json({ error: "Error getting posts for the specific user " })
     })
 })
 
