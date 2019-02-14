@@ -134,7 +134,4 @@ router.get('/:id/posts', (req, res) => {
 
 
 
-
-
-
 module.exports = router;
