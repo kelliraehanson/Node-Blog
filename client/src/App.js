@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import axios from 'axios';
 
-const url = "http://localhost:7777/api/users"
+const url = "https://nodeblog-kellihanson.herokuapp.com/api/users"
 
 class App extends Component {
   constructor(props) {
